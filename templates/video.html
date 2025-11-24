@@ -826,6 +826,87 @@
           settingsPanel.classList.remove('open');
           settingsPanel.setAttribute('aria-hidden', 'true');
         }
+        document.addEventListener('DOMContentLoaded', function () {
+  // タブ切替処理
+  (function initSettingsTabs(){
+    const tabs = Array.from(document.querySelectorAll('.settings-tabs .tab'));
+    if (!tabs.length) return;
+    function activate(tabBtn) {
+      tabs.forEach(t => {
+        const target = document.getElementById(t.dataset.target);
+        t.classList.toggle('active', t === tabBtn);
+        t.setAttribute('aria-selected', t === tabBtn ? 'true' : 'false');
+        if (target) target.hidden = t !== tabBtn;
+      });
+    }
+    tabs.forEach(t => t.addEventListener('click', () => activate(t)));
+    // 初期アクティブは最初のタブ
+    activate(tabs[0]);
+  })();
+
+  // ループ / 自動次へ トグル同期処理
+  (function initPlaybackToggles(){
+    const loopToggle = document.getElementById('loopTogglePanel');
+    const autonextToggle = document.getElementById('autonextTogglePanel');
+    const player = document.getElementById('player');
+
+    // 既存のチェックボックスがページ内にある場合は同期対象にする
+    const existingLoopCheckbox = document.getElementById('loop');
+    const existingAutonextCheckbox = document.getElementById('autonextpage');
+
+    // 初期値読み込み
+    try {
+      if (loopToggle) {
+        const haveLoopCookie = (getCookie && getCookie('loop') === 'true') || (player && player.loop) || false;
+        loopToggle.checked = Boolean(haveLoopCookie);
+        if (existingLoopCheckbox) existingLoopCheckbox.checked = loopToggle.checked;
+        if (player) player.loop = loopToggle.checked;
+      }
+      if (autonextToggle) {
+        const haveAuto = (getCookie && getCookie('autonextpage') === 'true') || (existingAutonextCheckbox && existingAutonextCheckbox.checked) || false;
+        autonextToggle.checked = Boolean(haveAuto);
+        if (existingAutonextCheckbox) existingAutonextCheckbox.checked = autonextToggle.checked;
+      }
+    } catch(e){ console.warn('initPlaybackToggles init error', e); }
+
+    // ハンドラ：ループ切替
+    if (loopToggle) {
+      loopToggle.addEventListener('change', function () {
+        const enabled = !!this.checked;
+        if (player) player.loop = enabled;
+        if (existingLoopCheckbox) existingLoopCheckbox.checked = enabled;
+        if (typeof setCookie === 'function') setCookie('loop', enabled, 0.125); // 3時間程度なら 0.125 日
+        if (window.showToast) window.showToast('ループ設定', enabled ? 'ループ再生を有効にしました' : 'ループ再生を無効にしました');
+      });
+    }
+
+    // ハンドラ：自動次へ切替
+    if (autonextToggle) {
+      autonextToggle.addEventListener('change', function () {
+        const enabled = !!this.checked;
+        if (existingAutonextCheckbox) existingAutonextCheckbox.checked = enabled;
+        if (typeof setCookie === 'function') setCookie('autonextpage', enabled, 0.125);
+        if (window.showToast) window.showToast('自動遷移設定', enabled ? '次の動画を自動で読み込みます' : '自動遷移を無効にしました');
+      });
+    }
+
+    // 既存の既存チェックボックスが操作されたらパネル側も同期（双方向）
+    if (existingLoopCheckbox) {
+      existingLoopCheckbox.addEventListener('change', function(){
+        if (loopToggle) loopToggle.checked = this.checked;
+        if (player) player.loop = this.checked;
+        if (typeof setCookie === 'function') setCookie('loop', this.checked, 0.125);
+      });
+    }
+    if (existingAutonextCheckbox) {
+      existingAutonextCheckbox.addEventListener('change', function(){
+        if (autonextToggle) autonextToggle.checked = this.checked;
+        if (typeof setCookie === 'function') setCookie('autonextpage', this.checked, 0.125);
+      });
+    }
+  })();
+});
+
 
         settingsToggle.addEventListener('click', function(e){
           e.stopPropagation();
