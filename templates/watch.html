@@ -1,293 +1,1259 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="robots" content="noindex,nofollow">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>勉強に集中したい！勉強への集中力をアップする方法とは？</title>
+    <link rel="icon" href="/img/logo/favicon.ico">
 
-        <title>勉強に集中したい！勉強への集中力をアップする方法とは？</title>
-        <link rel="icon" href="/img/logo/favicon.ico">
-        
-        <link rel="stylesheet" href="/css/pure-min.css">
-        <link rel="stylesheet" href="/css/grids-responsive-min.css">
-        <link rel="stylesheet" href="/css/ionicons.min.css">
-        <link rel="stylesheet" href="/css/default.css">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=thumb_up" />
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="/js/utils/utils.js"></script>
-	      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // モバイル時：ハンバーガーメニューのトグル
-      $("#hamburger").click(function() {
-        $("#top-nav").toggleClass("show");
-      });
-      
-      // スクロールによるトップバーの縮小効果
-      $(window).on("scroll", function() {
-        if($(window).scrollTop() > 50) {
-          $("#top-bar").addClass("scrolled");
-        } else {
-          $("#top-bar").removeClass("scrolled");
+    <link rel="stylesheet" href="/css/pure-min.css">
+    <link rel="stylesheet" href="/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=thumb_up" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/utils/utils.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+      /* もともとのCSS（保持） */
+      :root {
+        --yt-spec-base-background: #ffffff;
+        --yt-spec-raised-background: #ffffff;
+        --yt-spec-menu-background: #ffffff;
+        --yt-spec-inverted-background: #0f0f0f;
+        --yt-spec-outline: rgba(0, 0, 0, 0.1);
+        --yt-spec-text-primary: #0f0f0f;
+        --yt-spec-text-secondary: #606060;
+        --yt-spec-red: #ff0000;
+        --yt-spec-brand-button-text: #065fd4;
+      }
+      div.thumbnail {
+        padding: 8.5%;
+        position: relative;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Roboto, Arial, sans-serif;
+        background-color: var(--yt-spec-base-background);
+        color: var(--yt-spec-text-primary);
+        margin: 0;
+        padding: 0;
+      }
+      @media (max-width: 768px) {
+        .shorts-link span {
+          display: none;
+        }
+      }
+      /* メインコンテンツ */
+      .main-content {
+        margin-top: 56px;
+        min-height: calc(100vh - 56px);
+        padding: 16px;
+      }
+      /* 動画＆動画情報レイアウト */
+      .video-container {
+        display: flex;
+        gap: 16px;
+      }
+      .video-left {
+        flex: 0 0 75%;
+        display: flex;
+        flex-direction: column;
+      }
+      .video-right {
+        flex: 0 0 30%;
+      }
+      .video-player-container {
+        width: 100%;
+      }
+      /* 動画プレーヤーラッパー（絶対配置の基準） */
+      .video-player-wrapper {
+        position: relative;
+      }
+      .video-player-wrapper video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
+      /* ロード中スピナー（動画中央に表示） */
+      #loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        display: none;
+      }
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      .video-description {
+        margin-top: 16px;
+        background-color: #f9f9f9;
+        padding: 12px;
+        border-radius: 4px;
+        text-align: left;
+      }
+      .comments-section {
+        margin-top: 16px;
+        background-color: #ffffff;
+        padding: 12px;
+        border: 1px solid var(--yt-spec-outline);
+        border-radius: 4px;
+        text-align: left;
+      }
+      .comments-section h3 {
+        margin-top: 0;
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      .comment-item {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--yt-spec-outline);
+      }
+      .comment-item:last-child {
+        border-bottom: none;
+      }
+      .comment-header {
+        margin-bottom: 4px;
+      }
+      .comment-author {
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      .comment-actions {
+        font-size: 12px;
+        color: var(--yt-spec-text-secondary);
+      }
+    /* 関連動画（右カラム）の上書きスタイル */
+.video-right {
+  /* 右カラム内の既存余白を崩さない */
+}
+
+/* 各関連動画アイテム全体を横並びにする（サムネイル左・情報右） */
+.video-right .recomeention {
+  display: block;
+  margin-bottom: 12px;
+  padding: 6px 4px;
+  border-radius: 8px;
+}
+
+/* リンク部分をフレックスにして左にサムネ、小さく配置 */
+.video-right .recomeention > a {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 2px;
+}
+
+/* 内包される .thumbnail（div） の余白やパディングを無効化して小さく調整 */
+.video-right .recomeention > a .thumbnail {
+  padding: 0 !important;
+  width: 120px;          /* サムネイル領域の幅（調整可） */
+  flex: 0 0 120px;
+  box-sizing: border-box;
+  position: relative;
+  height: 67.5px;        /* 16:9 比率（120 * 9 / 16 = 67.5） */
+  overflow: hidden;
+  border-radius: 6px;
+  background: #000;
+}
+
+/* 実際の img.thumbnail をサムネイル領域に馴染ませる */
+.video-right .recomeention > a .thumbnail img.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+
+/* サムネイル上の長さ表示（.length）がある場合の位置調整 */
+.video-right .recomeention > a .thumbnail .length {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/* 右側メタ領域（タイトルとその下の情報） */
+.video-right .recomeention > a p,
+.video-right .recomeention > a .meta {
+  margin: 0;
+  padding: 0;
+}
+
+/* タイトル（a の直下の p 要素） */
+.video-right .recomeention > a p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 最大2行で省略 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  min-width: 0; /* テキスト省略を効かせるため */
+}
+
+/* タイトルの下にある視聴回数とチャンネルリンクは .recomeention 内の p, a 要素として存在するので微調整 */
+.video-right .recomeention > p,
+.video-right .recomeention > a + p,
+.video-right .recomeention > a + p + a {
+  font-size: 0.82rem;
+  color: var(--yt-spec-text-secondary, #606060);
+  margin: 6px 0 0 0;
+}
+
+/* チャンネルリンク（下段の a） */
+.video-right .recomeention > a + p + a {
+  color: var(--yt-spec-text-secondary, #606060);
+  text-decoration: none;
+}
+
+/* ホバー時の視覚効果（リンク全体に限定） */
+.video-right .recomeention > a:hover {
+  background: rgba(0,0,0,0.03);
+  border-radius: 8px;
+}
+
+
+
+/* 既存の .thumbnail 全体に影響する過剰指定をリセット（副作用を避けるため限定的に） */
+.video-right .recomeention > a .thumbnail,
+.video-right .recomeention > a .thumbnail * {
+  box-shadow: none;
+}
+
+       /* トップバー */
+      #top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        height: 56px;
+        padding: 0 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      /* トップバー左側：ハンバーガー＆ロゴ */
+      #top-bar .left-section {
+        display: flex;
+        align-items: center;
+      }
+      #open-sidebar {
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #007bff;
+      }
+      /* サイドバー */
+      #sidebar {
+        position: fixed;
+        top: 56px;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100% - 56px);
+        background-color: #000;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        z-index: 1100;
+        color: #fff;
+      }
+      #sidebar.active {
+        left: 0;
+      }
+      #sidebar .sidebar-content {
+        padding: 20px;
+      }
+      #sidebar a {
+        display: block;
+        margin-bottom: 10px;
+        color: #fff;
+        text-decoration: none;
+      }
+      #sidebar button#close-sidebar {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #fff;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+      /* オーバーレイ */
+      #overlay {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 56px);
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+      #overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* サイドバー内の各項目を区切る */
+      #sidebar .sidebar-content > * {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 0;
+        margin: 0;
+      }
+      #sidebar .sidebar-content > *:last-child {
+        border-bottom: none;
+      }
+
+      /* ---------- 追加（歯車・設定パネル・トースト） ---------- */
+
+      /* 歯車（左下に固定） */
+      .settings-toggle {
+        position: fixed;
+        left: 18px;
+        bottom: 18px;
+        z-index: 140;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+      }
+      .settings-toggle .gear {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(0,0,0,0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+        color: #fff;
+        font-size: 20px;
+      }
+      /* 設定パネル（歯車の上に表示） */
+      .settings-panel {
+        position: fixed;
+        bottom: 78px;
+        left: 18px;
+        width: 320px;
+        max-width: calc(100% - 36px);
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+        padding: 16px;
+        z-index: 139;
+        transform-origin: bottom left;
+        transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+        pointer-events: none;
+      }
+      .settings-panel.open {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .settings-panel h4 { margin: 0 0 10px; font-size: 1rem; color: #222; }
+      .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+      .settings-row:last-child { border-bottom: none; }
+      .settings-row label { font-size: 0.92rem; color: #333; }
+      .settings-row .desc { font-size: 0.8rem; color: #666; display:block; margin-top:6px; }
+
+      /* トースト（右上） */
+      .toast-wrap {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 150;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: none;
+      }
+      .toast {
+        min-width: 220px;
+        max-width: 360px;
+        background: linear-gradient(180deg,#fff,#f6f9ff);
+        border-radius: 10px;
+        padding: 12px 14px;
+        box-shadow: 0 10px 30px rgba(14,30,37,0.12);
+        color: #042a4a;
+        font-size: 0.95rem;
+        border-left: 4px solid #007BFF;
+        transform: translateX(12px) translateY(-8px) scale(.98);
+        opacity: 0;
+        transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 240ms ease;
+        pointer-events: auto;
+        touch-action: pan-y;
+        user-select: none;
+        position: relative;
+      }
+      .toast.show { transform: translateX(0) translateY(0) scale(1); opacity: 1; }
+      .toast .title { font-weight: 700; margin-bottom: 6px; }
+      .toast .body { font-weight: 500; color: #234; }
+      .toast.dragging { transition: none; opacity: 0.95; }
+      .toast .close-x { position: absolute; top: 6px; right: 8px; font-weight: 700; color: rgba(0,0,0,0.45); cursor: pointer; }
+      .toast .hint { margin-top: 8px; font-size: 0.78rem; color: #556; display:block; }
+
+      /* ---------- 追加終わり ---------- */
+    </style>
+
+    <!-- Font Awesome（アイコン用） -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+ <!-- トップバー -->
+    <header id="top-bar">
+      <div class="left-section">
+  
+        <div class="navbar-logo">
+          <a href="/"><img src="/img/logo/th.png" alt="Logo"></a>
+        </div>
+      </div>
+     <div class="search-container">
+        <form class="pure-form" action="/search" method="get">
+          <fieldset>
+            <input id="searchbox" name="q" type="search" placeholder="検索" title="検索" autocomplete="on" autocorrect="on" autocapitalize="none" spellcheck="false">
+          </fieldset>
+        </form>
+      </div>
+      <nav id="top-nav">
+        <a href="/bbs">掲示板</a>
+        <a href="/proxypage">Proxy</a>
+        <a href="/others">その他</a>
+        <a href="/sitsumon">回答よろ</a>
+      </nav>
+    </header>
+
+
+
+    <!-- 歯車ボタン（左下） -->
+    <button class="settings-toggle" id="settingsToggle" aria-label="設定を開く">
+      <span class="gear">設定⚙️</span>
+    </button>
+
+    <!-- 設定パネル（歯車の上に立ち上がる） -->
+    <div class="settings-panel" id="settingsPanel" role="dialog" aria-hidden="true" aria-labelledby="settingsTitle">
+      <h4 id="settingsTitle">表示と再生の設定</h4>
+
+      <div class="settings-row">
+        <div>
+          <label for="vcSelectPanel">再生モード</label>
+          <div class="desc">リンク先を選択できます。設定はクッキーで保存されます。</div>
+        </div>
+        <div>
+          <select id="vcSelectPanel" style="min-width:120px;">
+         <option value="1">stream再生</option>
+        <option value="2">高画質再生</option>
+        <option value="3">nocookie</option>
+        <option value="0">education</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <label for="proxyToggle">サムネイルプロキシ</label>
+          <div class="desc">プロキシによるサムネイル取得をオンにします（クッキーで保存）</div>
+        </div>
+        <div>
+          <input id="proxyToggle" type="checkbox" />
+        </div>
+      </div>
+
+      <div style="padding-top:10px; text-align:right;">
+        <button id="settingsSaveBtn" style="padding:8px 12px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background:#007BFF; color:#fff; cursor:pointer;">保存</button>
+      </div>
+    </div>
+
+    <div class="no-theme">
+      <!-- メインコンテンツ -->
+      <main class="main-content">
+        <div class="video-container">
+          <!-- 左カラム：動画プレーヤーとその下に動画説明、コメント -->
+          <div class="video-left">
+            <div class="video-player-container">
+  <div id="defaultPlayer" class="video-player-wrapper">
+   <!-- video タグは source を1つだけにする -->
+<video id="player" controls playsinline preload="none">
+  {% if streamUrls and streamUrls|length > 0 %}
+    <source src="{{ streamUrls[0]['url'] }}">
+  {% elif videourls and videourls|length > 0 %}
+    <source src="{{ videourls[0] }}">
+  {% endif %}
+</video>
+
+
+<div id="qualityControl" style="margin:8px 0; display:flex; gap:8px; align-items:center;">
+  <label for="qualitySelect">画質:</label>
+  <select id="qualitySelect" style="min-width:140px;">
+    {% if streamUrls and streamUrls|length > 0 %}
+      {% for s in streamUrls %}
+        <option value="{{ s['url'] }}">{{ s['resolution'] or '自動' }}</option>
+      {% endfor %}
+    {% else %}
+      {% if videourls and videourls|length > 0 %}
+        <option value="{{ videourls[0] }}">デフォルト</option>
+      {% endif %}
+    {% endif %}
+  </select>
+</div>
+    <div id="loader"></div>
+  </div>
+
+</div>
+
+
+            <!-- 動画の説明 -->
+            <div class="video-description" id="descriptionText">
+              <a href="/channel/{{ author_id }}" style="display: inline-block; width: fit-content; width: -moz-fit-content">
+            <div class="channel-profile">
+
+              <img src="{{ author_icon }}">
+
+              <span id="channel-name">{{ author }}</span>
+            </div>
+        </a>
+              <h1>{{ video_title }}</h1>
+              <p style="display: inline-block; margin-right: 10px; vertical-align: super;">{{ view_count }}回視聴</p>
+              <div style="display: inline-block;">
+                <span class="material-symbols-outlined" style="display: inline-block; padding-right: 5px;">thumb_up</span>
+                <p style="display: inline-block; vertical-align: super;">{{ like_count }}</p>
+              </div><br>
+              {{ description | safe }}
+            </div>
+            <!-- コメントエリア -->
+            <div class="comments-section">
+              <h3>コメント</h3>
+              <div id="comments"></div>
+            </div>
+          </div>
+          <!-- 右カラム：関連動画 -->
+          <div class="video-right">
+            {% for rec_video in recommended_videos %}
+            <div class="recomeention">
+              <a href="/watch?v={{ rec_video['video_id'] }}">
+                <div class="thumbnail">
+                  <img loading="lazy" class="thumbnail" src="{% if proxy == 'True' %}/thumbnail?v={{ rec_video['video_id'] }}{% else %}https://img.youtube.com/vi/{{ rec_video['video_id'] }}/0.jpg{% endif %}" alt="{{ rec_video['title'] }}">
+                  <span class="length">{{ rec_video["length_text"] }}</span>
+                </div>
+                <p>{{ rec_video["title"] }}</p>
+              </a>
+              <p>{{ rec_video["view_count_text"] }}回視聴</p>
+              <a href="/channel/{{ rec_video["authorId"] }}">{{ rec_video["author"] }}</a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+      const video = document.getElementById("player");
+      const loader = document.getElementById("loader");
+
+      // ユーザーが「再生」をクリックしたとき、video.currentTime が 0 なら loader を表示
+      video.addEventListener("play", () => {
+        if (video.currentTime === 0) {
+          loader.style.display = "block";
         }
       });
-    });
-  </script>
-    </head>
-    <body>
-     <header id="top-bar">
-    <div class="navbar-logo">
-      <a href="/"><img src="/img/logo/th.png" alt="Logo"></a>
-    </div>
-    <!-- モバイル用ハンバーガーアイコン -->
-    <div id="hamburger">&#9776;</div>
-    <!-- ナビゲーション -->
-    <nav id="top-nav">
-      <a href="/bbs">掲示板</a>
-      <a href="/proxypage">Proxy</a>
-      <a href="/others">その他</a>
-      <a href="/sitsumon">回答よろ</a>
-	&emsp;
-    </nav>
-  </header>
-	    <br>
-	    <div class="no-theme">
-        <span id="dark_mode_pref" style="display:none"></span>
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-2-24"></div>
-            <div id="contents" class="pure-u-1 pure-u-md-20-24">
-		    <div class="pure-g navbar h-box">
-                    <div class="pure-u-1 pure-u-md-12-24 searchbar">
-                        <form class="pure-form" action="/search" method="get">
-                            <fieldset>
-                                <input id="searchbox" name="q" type="search" placeholder="検索" value="" title="検索" autocomplete="on" autocorrect="on" autocapitalize="none" spellcheck="false" >
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-                <div id="player-container" class="h-box">
-                    <video id="player" class="on-video_player video-js player-style-invidious" loadedmetadata="settime()" controls="" playsinline="" loop="" style="outline:none;width:100%;background-color:#000;" poster="{% if proxy == "True" %}/thumbnail?v={{ videoid }}{% else %}https://img.youtube.com/vi/{{ videoid }}/0.jpg{% endif %}">
-                        {% for videourl in videourls%}
-                        <source class="player-source" src="{{ streamUrls }}">
-                        {% endfor %}
-                        <p id="video_info">お使いのブラウザは動画の再生に対応していません。</p>
-                    </video>
-                </div>
-		    streamUrls.resolution
-                <div class="h-box">
-                    <h1>{{ streamUrls.resolution }}</h1>
-                    <p style="display: inline-block; margin-right: 10px; vertical-align: super;">{{ view_count }}回視聴</p>
-                    <div style="display: inline-block;"><span class="material-symbols-outlined" style="display: inline-block; padding-right: 5px;">thumb_up</span><p style="display: inline-block; vertical-align: super; ">{{ like_count }}</p></div>
 
-                    <p id="player_current_time" style="display: inline-block; margin-left: 10px; vertical-align: super;"></p>
-                    <p style="display: inline-block; vertical-align: super;">/ {{ length_text }}</p>
-                </div><br>
-                <div class="pure-g">
-                    <div class="pure-u-1 pure-u-lg-1-5">
-                         <a href="{{ videourls[0] }}" download="{{ video_title }}">ダウンロード</a><br>
-                             <a href="javascript:location.replace('/watch?v={{ videoid }}')">デフォルトで視聴する</a><br>
-			       <a href="javascript:location.replace('/ume?v={{ videoid }}')">埋め込み(nocookie)で視聴する</a><br>
-			      <a href="javascript:location.replace('/w?v={{ videoid }}')">高画質再生‼︎</a>
-                        <hr>
-                    </div>
-                    <div class="pure-u-1 pure-u-lg-3-5">
-                        <div class="h-box">
-                                <a href="/channel/{{ author_id }}" style="display: inline-block; width: fit-content; width: -moz-fit-content">
-                                    <div class="channel-profile">
+      // 動画の再生が進んだら loader を非表示にする処理
+      function checkVideoTime() {
+        if (video.currentTime > 0) {
+          loader.style.display = "none";
+          video.removeEventListener("timeupdate", checkVideoTime);
+          video.removeEventListener("playing", checkVideoTime);
+        }
+      }
+      video.addEventListener("timeupdate", checkVideoTime);
+      video.addEventListener("playing", checkVideoTime);
+    </script>
 
-                                        <img src="{{ author_icon }}">
+    <script>
+      const openSidebar = document.getElementById("open-sidebar");
+      const closeSidebar = document.getElementById("close-sidebar");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
 
-                                        <span id="channel-name">{{ author }}</span>
-                                    </div>
-                                </a>
-                                <p>チャンネル登録者数: {{ subscribers_count }}人</p>
-                            <div id="description-box">
-                                <div id="descriptionWrapper">{{ description | safe}}</div>
-                            </div>
-                            <hr>
-                            <div id="comments"></div>
-                        </div>
-                    </div>
-                    <div class="pure-u-1 pure-u-lg-1-5">
-			 <select id="video1"></select>
+      openSidebar.addEventListener("click", () => {
+        sidebar.classList.add("active");
+        overlay.classList.add("active");
+      });
 
+      const closeSidebarFunc = () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      };
+
+      closeSidebar.addEventListener("click", closeSidebarFunc);
+      overlay.addEventListener("click", closeSidebarFunc);
+    </script>
+
+    <!-- 以降はその他の既存JS -->
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "/comments?v=" + getQueryValue('v'));
+      xhr.onload = function () {
+        if (xhr.status == 200) {
+          const comments_div = document.getElementById('comments');
+          comments_div.innerHTML = xhr.responseText;
+          const comments_a_tags = comments_div.getElementsByTagName('a');
+          for(let i = 0; i < comments_a_tags.length; i++) {
+            const jump_time = comments_a_tags[i].getAttribute('data-jump-time')
+            if(jump_time) {
+              comments_a_tags[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                player.currentTime = jump_time;
+              });
+            }
+          }
+        } else {
+          document.getElementById('comments').innerHTML = "コメントの読み込みに失敗しました。再読み込み等をお試し下さい。";
+        }
+      };
+      xhr.send();
+
+      let player = document.getElementById("player");
+      document.cookie = "yuki=True; path=/; max-age=10800;";
+
+      const haveLoopCookie = getCookie("loop") === 'true' ? true : false;
+      player.loop = haveLoopCookie;
+      document.getElementById("loop").checked = haveLoopCookie;
+      document.getElementById("autonextpage").checked = getCookie("autonextpage") === 'true' ? true : false;
+
+      function changeAutoNextPage(checkbox) {
+        document.cookie =  `autonextpage=${checkbox.checked}; path=/; max-age=10800;`;
+      }
+      
+      function autoNextPage() {
+        const enable_autoNextPage = document.getElementById('autonextpage').checked;
+        document.cookie = `autonextpage=${enable_autoNextPage}; max-age=10800;`;
+        if (enable_autoNextPage) {
+          setTimeout(() => {
+            location.replace("/watch?v={{ recommended_videos[0]['video_id'] }}");
+          }, 5000);
+        }
+      }
+      player.addEventListener('ended', autoNextPage);
+      
+      function changeLoop(checkbox) {
+        const enable_loop = checkbox.checked;
+        document.getElementById("player").loop = enable_loop;
+        document.cookie = `loop=${enable_loop}; path=/; max-age=10800;`;
+      }
+      
+      document.getElementById("player").currentTime = getQueryValue('t') || 0;
+      
+      function keydown(key) {
+        if (key.keyCode == 32 || key.keyCode == 75) {
+          const v = document.getElementById("player");
+          if (v.paused === true) {
+            v.play();
+          } else {
+            v.pause();
+          }
+        }
+      }
+      window.addEventListener('keydown', keydown);
+      
+      const description_a_tags = document.getElementById('descriptionWrapper').getElementsByTagName('a');
+      for(let i = 0; i < description_a_tags.length; i++) {
+        const jump_time = description_a_tags[i].getAttribute('data-jump-time')
+        if(jump_time) {
+          description_a_tags[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            player.currentTime = jump_time;
+          });
+        }
+      }
+      
+      player.style.maxHeight = document.documentElement.clientHeight * 0.8 + "px";
+      
+      let info = document.getElementById('video_info');
+      let reload_button_elm = document.createElement('button');
+      reload_button_elm.setAttribute('onclick', 'location.replace(location.href);');
+      reload_button_elm.innerHTML = 'リロード';
+      
+      setTimeout(() => {
+        if(player.networkState === 3){
+          let update_api_xhr = new XMLHttpRequest();
+          update_api_xhr.open("GET", "/api/video/next"); 
+          update_api_xhr.send();
+          
+          info.innerHTML = '動画の読み込みに失敗しました。再読み込み等をお試し下さい。<br>';
+          info.innerHTML += '過度な再読み込みはインスタンスに負荷がかかり、短期間で使用不能に陥ることや、動画等の読み込みが出来なくなることが考えられますのでご遠慮下さい。';
+          player.after(reload_button_elm);
+          player.after(info);
+          player.remove();
+        }
+      }, 1000);
+      
+      (function updateDisplayCurrentTime() {
+        setTimeout(() => {
+          const player = document.getElementById('player');
+          const current_time_elem = document.getElementById('player_current_time');
+          if(player) {
+            current_time_elem.textContent = secToHMS(player.currentTime | 0);
+          } else {
+            current_time_elem.textContent = 'Error';
+          }
+          updateDisplayCurrentTime();
+        }, 100);
+      })();
+    </script>
+<!-- hls.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
+(function(){
+  const select = document.getElementById('qualitySelect');
+  const video = document.getElementById('player');
+  let hls = null;
 
-  // 実際に stream.Urls から option タグを動的に生成する例
-  const selectElem = document.getElementById("video1");
-  let optionsHTML = "";
+  function isHls(url){ return typeof url === 'string' && url.indexOf('.m3u8') !== -1; }
+  function destroyHls(){ if(hls){ try{ hls.destroy(); }catch(e){} hls = null; } }
 
-  streamUrls.url.forEach(item => {
-    optionsHTML += `<option value="${item.url}">${item.resolution}</option>`;
+  function setSource(url, autoplay=false){
+    if(!url) return;
+    if(isHls(url) && window.Hls && Hls.isSupported()){
+      destroyHls();
+      hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function(){ if(autoplay) video.play().catch(()=>{}); });
+    } else {
+      destroyHls();
+      let src = video.querySelector('source');
+      if(!src){ src = document.createElement('source'); video.appendChild(src); }
+      src.src = url;
+      video.load();
+      if(autoplay) video.play().catch(()=>{});
+    }
+  }
+
+  if(select){
+    select.addEventListener('change', function(e){
+      setSource(e.target.value, true);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    if(select && select.options.length > 0){
+      // 初期は自動再生しない
+      setSource(select.options[0].value, false);
+    }
   });
 
-  selectElem.innerHTML = optionsHTML;
+  window.addEventListener('beforeunload', destroyHls);
+})();
 </script>
 
-                        <label for="autonextpage">自動で次の動画に遷移<input id="autonextpage" type="checkbox" onchange="changeAutoNextPage(this)"></label><br>
-                        <label for="loop">ループ再生<input id="loop" type="checkbox" onchange="changeLoop(this)"></label>
-                    
-                        {% for rec_video in recommended_videos %}
-                        <a href="/watch?v={{ rec_video['video_id'] }}">
-                            <div class="thumbnail">
-                                <img loading="lazy" class="thumbnail" src="{% if proxy == 'True' %}/thumbnail?v={{ rec_video['video_id'] }}{% else %}https://img.youtube.com/vi/{{ rec_video['video_id'] }}/0.jpg{% endif %}">
-                                <p class="length">{{ rec_video["length_text"] }}</p>
-                            </div>
-                            <p style="width:100%;">{{ rec_video["title"] }}</p>
-                        </a>
-                        <p>{{ rec_video["view_count_text"] }}回視聴</p>        
-                        <a href="/channel/{{ rec_video['authorId'] }}">{{ rec_video["author"] }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="pure-u-1 pure-u-md-2-24"></div>
-        
-        <script>
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "/comments?v=" + getQueryValue('v'));
-            xhr.onload = function () {      
-                if (xhr.status == 200) {
-                    const comments_div = document.getElementById('comments');
-                    comments_div.innerHTML = xhr.responseText;
 
-                    const comments_a_tags = comments_div.getElementsByTagName('a');
 
-                    for(let i = 0; i < comments_a_tags.length; i++) {
-                        const jump_time = comments_a_tags[i].getAttribute('data-jump-time')
+    <script>
+      $('#searchbox').autocomplete({
+        source: function (request, response) {
+          const url = "/suggest?keyword=" + request.term;
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.onload = function () {
+            response(JSON.parse(xhr.responseText));
+          }
+          xhr.send();
+        },
+        delay: 300
+      });
+    </script>
+    
+    <div class="latest-info" id="latestInfo">
+      <h3>welcome!!</h3>
+      <div id="infoContent">
+        chatにきてください‼︎「その他」のところにあります‼︎
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const infoContent = document.getElementById("infoContent");
+        let toggle = true;
+        setInterval(() => {
+          infoContent.textContent = toggle ? "高画質機能追加！左にある高画質再生を押してみて‼︎" : "chatにきてください‼︎「その他」のところにあります‼︎";
+          toggle = !toggle;
+        }, 5000);
+      });
+    </script>
+    
+    <!-- 動画視聴ページ用の履歴登録スクリプト -->
+    <script>
+      function addToHistory() {
+        const videoData = {
+          video_id: "{{ videoid }}",
+          thumbnail: "{% if proxy == 'True' %}/thumbnail?v={{ videoid }}{% else %}https://img.youtube.com/vi/{{ videoid }}/0.jpg{% endif %}",
+          length: "{{ length_text }}",
+          title: "{{ video_title }}",
+          channel: "{{ author }}",
+          channel_id: "{{ author_id }}",
+          view_count: "{{ view_count }}",
+          published: "{{ published_date }}"
+        };
+        let history = localStorage.getItem('watchHistory');
+        history = history ? JSON.parse(history) : [];
+        history = history.filter(item => item.video_id !== videoData.video_id);
+        history.unshift(videoData);
+        if (history.length > 50) {
+          history = history.slice(0, 50);
+        }
+        localStorage.setItem('watchHistory', JSON.stringify(history));
+      }
+      window.addEventListener('load', addToHistory);
+    </script>
 
-                        if(jump_time) {
-                            comments_a_tags[i].addEventListener('click', function(e) {
-                                e.preventDefault()
-                                player.currentTime = jump_time;
-                            })
-                        }
-                    }
-                } else { 
-                    document.getElementById('comments').innerHTML = "コメントの読み込みに失敗しました。再読み込み等をお試し下さい。"; 
-                }
-            };
-            xhr.send();
+    <!-- 設定パネル / トースト の動作スクリプト（重複抑制付き） -->
+    <script>
+      /* cookie helpers */
+      function getCookie(name) {
+        const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return v ? decodeURIComponent(v.pop()) : null;
+      }
+      function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days||30) * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+      }
 
-            let player = document.getElementById("player");
+      document.addEventListener('DOMContentLoaded', function() {
+        const settingsToggle = document.getElementById('settingsToggle');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsSaveBtn = document.getElementById('settingsSaveBtn');
+        const proxyToggle = document.getElementById('proxyToggle');
+        const vcSelectPanel = document.getElementById('vcSelectPanel');
 
-            document.cookie = "yuki=True; path=/; max-age=10800;";
-        
+        // 初期値をクッキーから読み出し（なければ既定値）
+        const vcCookie = getCookie('vc') || '0';
+        if (vcSelectPanel) vcSelectPanel.value = vcCookie;
+        const proxyCookie = getCookie('proxy') || ('{{ proxy }}' === 'True' ? 'True' : 'False');
+        proxyToggle.checked = proxyCookie === 'True';
 
-            const haveLoopCookie = getCookie("loop") === 'true' ? true : false;
-            player.loop = haveLoopCookie;
-            document.getElementById("loop").checked = haveLoopCookie;
+        function openSettings() {
+          settingsPanel.classList.add('open');
+          settingsPanel.setAttribute('aria-hidden', 'false');
+        }
+        function closeSettings() {
+          settingsPanel.classList.remove('open');
+          settingsPanel.setAttribute('aria-hidden', 'true');
+        }
 
-            document.getElementById("autonextpage").checked = getCookie("autonextpage") === 'true' ? true : false;
-            
+        settingsToggle.addEventListener('click', function(e){
+          e.stopPropagation();
+          if (settingsPanel.classList.contains('open')) closeSettings();
+          else openSettings();
+        });
 
-            function changeAutoNextPage(checkbox) {      
-                document.cookie =  `autonextpage=${checkbox.checked}; path=/; max-age=10800;`;
-            }
-            
-            function autoNextPage() {
-                const enable_autoNextPage = document.getElementById('autonextpage').checked;
-                document.cookie = `autonextpage=${enable_autoNextPage}; max-age=10800;`;
-                if (enable_autoNextPage) {
-                    setTimeout(() => {
-                        location.replace("/watch?v={{ recommended_videos[0]['video_id'] }}");
-                    }, 5000)
-                }
-            }
+        // クリックでパネル外を押したら閉じる
+        document.addEventListener('click', function(e){
+          if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) closeSettings();
+        });
 
-            player.addEventListener('ended', autoNextPage)
-            
-            function changeLoop(checkbox) {      
-                const enable_loop = checkbox.checked;
-                document.getElementById("player").loop = enable_loop;
-                document.cookie = `loop=${enable_loop}; path=/; max-age=10800;`;
-            }
-            
-            /* function sleep(waitMsec) {      var startMsec = new Date();while (new Date() - startMsec < waitMsec);} */
+        // 保存ボタン
+        settingsSaveBtn.addEventListener('click', function(){
+          const newVc = vcSelectPanel.value;
+          setCookie('vc', newVc, 30);
+          if (proxyToggle.checked) setCookie('proxy', 'True', 30);
+          else setCookie('proxy', 'False', 30);
 
-            
+          // トースト表示（重複抑制付き）
+          showToast('設定を保存しました!!', '保存完了');
 
-            document.getElementById("player").currentTime = getQueryValue('t') || 0;
-            
-            function keydown(key) {                  
-                if (key.keyCode == 32 || key.keyCode == 75) {
-                    const v = document.getElementById("player");
+          closeSettings();
+        });
+      });
 
-                    if (v.paused === true) {
-                        v.play();
-                    } else {
-                        v.pause();
-                    }
-                }
-            }
-        
-            window.addEventListener('keydown', keydown);
-        
+      /* トースト（重複抑制 / 最大同時表示数）実装 */
+      (function(){
+        const wrap = document.getElementById('toastWrap');
+        if (!wrap) return;
 
-            const description_a_tags = document.getElementById('descriptionWrapper').getElementsByTagName('a');
-            for(let i = 0; i < description_a_tags.length; i++) {
-                const jump_time = description_a_tags[i].getAttribute('data-jump-time')
+        const maxToasts = 3; // 同時表示数
+        const dedupeMap = new Map(); // key -> {el, timeoutId, expiresAt}
 
-                if(jump_time) {
-                    description_a_tags[i].addEventListener('click', function(e) {
-                        e.preventDefault()
-                        player.currentTime = jump_time;
-                    })
-                }
-            }
+        function makeKey(title, body) {
+          return (title || '') + '||' + (body || '');
+        }
 
-            player.style.maxHeight = document.documentElement.clientHeight * 0.8 + "px";
+        function ensureSpace() {
+          const toasts = wrap.querySelectorAll('.toast');
+          if (toasts.length < maxToasts) return;
+          let oldest = null;
+          toasts.forEach(t => {
+            const created = parseInt(t.getAttribute('data-created') || '0', 10);
+            if (!oldest || created < parseInt(oldest.getAttribute('data-created') || '0', 10)) oldest = t;
+          });
+          if (oldest) dismiss(oldest);
+        }
 
-            let info = document.getElementById('video_info');
+        function createToastElement(title, body) {
+          const el = document.createElement('div');
+          el.className = 'toast';
+          el.setAttribute('data-created', String(Date.now()));
+          el.innerHTML = '<div class="close-x" aria-hidden="true">✕</div>' +
+                         '<div class="title">' + (title || '') + '</div>' +
+                         '<div class="body">' + (body || '') + '</div>' +
+                         '<span class="hint">左から右へスライドで閉じる</span>';
+          return el;
+        }
 
-            let reload_button_elm = document.createElement('button');
-            reload_button_elm.setAttribute('onclick', 'location.replace(location.href);');
-            reload_button_elm.innerHTML = 'リロード';
-            
-            
-            setTimeout(() => {
-                if(player.networkState === 3){
-                    let update_api_xhr = new XMLHttpRequest();
-                    update_api_xhr.open("GET", "/api/video/next"); 
-                    update_api_xhr.send();
-                    
-                    info.innerHTML = '動画の読み込みに失敗しました。再読み込み等をお試し下さい。<br>';
-                    info.innerHTML += '過度な再読み込みはインスタンスに負荷がかかり、短期間で使用不能に陥ることや、動画等の読み込みが出来なくなることが考えられますのでご遠慮下さい。'
-                    player.after(reload_button_elm)
-                    player.after(info)
-                    player.remove()
-                }
-            }, 1000);
-            
-            (function updateDisplayCurrentTime() {
-                setTimeout(() => {
-                    const player = document.getElementById('player');
-                    const current_time_elem = document.getElementById('player_current_time')
-                    if(player) {
-                        current_time_elem.textContent = secToHMS(player.currentTime | 0);
-                    } else {
-                        current_time_elem.textContent = 'Error';
-                    }
-                    updateDisplayCurrentTime();
-                }, 100);
-            })();
-        </script>
-        <script>
-            $('#searchbox').autocomplete({
-                source: function (request, response) {      
-                    {
-                        const url = "/suggest?keyword=" + request.term;
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("GET", url);
-                        xhr.onload = function () {      
-                            response(JSON.parse(xhr.responseText));
-                        }
-                        xhr.send();
-                    }
-                }, delay: 300
+        function dismiss(el) {
+          if (!el || !el.parentNode) return;
+          const key = el._toastKey;
+          el.classList.remove('show');
+          el.style.transform = 'translateX(14px) translateY(-8px) scale(.98)';
+          el.style.opacity = '0';
+          if (el._toastTimeoutId) clearTimeout(el._toastTimeoutId);
+          if (key && dedupeMap.has(key)) dedupeMap.delete(key);
+          setTimeout(()=> { try { el.remove(); } catch(e) {} }, 260);
+        }
+
+        function focusToast(el) {
+          el.style.transition = 'none';
+          el.style.transform = 'translateY(-6px)';
+          setTimeout(()=> {
+            el.style.transition = '';
+            el.style.transform = '';
+          }, 260);
+        }
+
+        function createOrRefreshToast(title, body, ttl = 4200) {
+          const key = makeKey(title, body);
+
+          if (dedupeMap.has(key)) {
+            const info = dedupeMap.get(key);
+            clearTimeout(info.timeoutId);
+            info.timeoutId = setTimeout(()=> dismiss(info.el), ttl);
+            info.expiresAt = Date.now() + ttl;
+            focusToast(info.el);
+            return info.el;
+          }
+
+          ensureSpace();
+
+          const el = createToastElement(title, body);
+          el._toastKey = key;
+          wrap.appendChild(el);
+          requestAnimationFrame(()=> el.classList.add('show') );
+
+          const timeoutId = setTimeout(()=> dismiss(el), ttl);
+          el._toastTimeoutId = timeoutId;
+
+          dedupeMap.set(key, { el, timeoutId, expiresAt: Date.now() + ttl });
+
+          const closeX = el.querySelector('.close-x');
+          if (closeX) {
+            closeX.addEventListener('click', function(e){
+              e.stopPropagation();
+              clearTimeout(el._toastTimeoutId);
+              dismiss(el);
             });
-        </script>
-</body>
+          }
+
+          let startX = 0;
+          let currentX = 0;
+          let dragging = false;
+
+          function onPointerDown(ev) {
+            dragging = true;
+            el.classList.add('dragging');
+            startX = ev.type && ev.type.startsWith && ev.type.startsWith('touch') ? ev.touches[0].clientX : ev.clientX;
+            currentX = startX;
+            el.style.transition = 'none';
+          }
+          function onPointerMove(ev) {
+            if (!dragging) return;
+            const clientX = ev.type && ev.type.startsWith && ev.type.startsWith('touch') ? ev.touches[0].clientX : ev.clientX;
+            currentX = clientX;
+            const dx = currentX - startX;
+            el.style.transform = `translateX(${Math.max(0, dx)}px)`;
+            el.style.opacity = String(Math.max(0, 1 - Math.abs(dx) / 300));
+          }
+          function onPointerUp(ev) {
+            if (!dragging) return;
+            dragging = false;
+            el.classList.remove('dragging');
+            el.style.transition = '';
+            const dx = currentX - startX;
+            if (dx > 120) {
+              dismiss(el);
+            } else {
+              el.style.transform = '';
+              el.style.opacity = '';
+            }
+          }
+
+          el.addEventListener('mousedown', onPointerDown);
+          window.addEventListener('mousemove', onPointerMove);
+          window.addEventListener('mouseup', onPointerUp);
+          el.addEventListener('touchstart', onPointerDown, {passive:true});
+          window.addEventListener('touchmove', onPointerMove, {passive:true});
+          window.addEventListener('touchend', onPointerUp);
+
+          return el;
+        }
+
+        window.showToast = function(message, title, ttl) {
+          const body = message || '';
+          const head = title || '通知';
+          const time = typeof ttl === 'number' ? ttl : 4200;
+          createOrRefreshToast(head, body, time);
+        };
+      })();
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const vcSelect = document.getElementById('vcSelectPanel');
+  const saveBtn = document.getElementById('settingsSaveBtn');
+
+  function vcToPath(vc) {
+    switch(String(vc)) {
+      case '1': return '/watch';
+      case '2': return '/w';
+      case '3': return '/ume';
+      default:  return '/edu';
+    }
+  }
+
+  function setVcCookie(val) {
+    const d = new Date();
+    d.setTime(d.getTime() + 30*24*60*60*1000);
+    document.cookie = 'vc=' + encodeURIComponent(String(val)) + ';expires=' + d.toUTCString() + ';path=/';
+  }
+
+  function replaceToVcPath(vcValue) {
+    try {
+      const targetPath = vcToPath(vcValue);
+      const query = window.location.search || '';
+      // 既に同じパスなら何もしない
+      if (window.location.pathname === targetPath) return;
+      // 履歴を残さず置き換えて遷移
+      location.replace(targetPath + query);
+    } catch (e) {
+      console.warn('vc replace failed', e);
+    }
+  }
+
+  // select の変更で即時反映（cookie 記録と遷移）
+  if (vcSelect) {
+    vcSelect.addEventListener('change', function () {
+      const val = vcSelect.value;
+      setVcCookie(val);
+      replaceToVcPath(val);
+    });
+  }
+
+  // 保存ボタンでも反映（既存の保存処理を優先するため短い遅延で実行）
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function () {
+      const val = vcSelect ? vcSelect.value : '0';
+      setVcCookie(val);
+      setTimeout(function () { replaceToVcPath(val); }, 40);
+    });
+  }
+
+
+</script>
+    <script>
+document.addEventListener('DOMContentLoaded', function(){
+  const saveBtn = document.getElementById('settingsSaveBtn');
+  const vcSelect = document.getElementById('vcSelectPanel');
+  if (!saveBtn || !vcSelect) return;
+
+  // vc -> path
+  function vcToPath(vc) {
+    switch(String(vc)) {
+      case '1': return '/watch';
+      case '2': return '/w';
+      case '3': return '/ume';
+      default:  return '/edu';
+    }
+  }
+
+  // cookie 書き込み
+  function setVcCookie(val) {
+    const d = new Date();
+    d.setTime(d.getTime() + 30*24*60*60*1000);
+    document.cookie = 'vc=' + encodeURIComponent(String(val)) + ';expires=' + d.toUTCString() + ';path=/';
+  }
+
+  // showToast が存在しない場合に備えた最小実装
+  function ensureShowToastExists() {
+    if (typeof window.showToast === 'function') return;
+    window.showToast = function(message, title, ttl) {
+      const wrapId = 'toastWrap';
+      let wrap = document.getElementById(wrapId);
+      if (!wrap) {
+        wrap = document.createElement('div');
+        wrap.id = wrapId;
+        wrap.className = 'toast-wrap';
+        wrap.style.position = 'fixed';
+        wrap.style.top = '20px';
+        wrap.style.right = '20px';
+        wrap.style.zIndex = '150';
+        document.body.appendChild(wrap);
+      }
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.setAttribute('data-created', String(Date.now()));
+      el.innerHTML = '<div class="title">' + (title || '通知') + '</div><div class="body">' + (message || '') + '</div><div class="close-x" aria-hidden="true" style="position:absolute;right:8px;top:6px;cursor:pointer;">✕</div>';
+      wrap.appendChild(el);
+      requestAnimationFrame(()=> el.classList.add('show'));
+      const time = typeof ttl === 'number' ? ttl : 4200;
+      const tid = setTimeout(()=> {
+        try { el.remove(); } catch(e){}
+      }, time);
+      const cx = el.querySelector('.close-x');
+      if (cx) cx.addEventListener('click', function(e){ e.stopPropagation(); clearTimeout(tid); try{ el.remove(); }catch(_){} });
+    };
+  }
+
+  // showToast を呼び、実際に DOM に追加されたトースト要素を監視して Promise を返す
+  function showToastAsync(message, title, ttl) {
+    ensureShowToastExists();
+    return new Promise((resolve) => {
+      const wrap = document.getElementById('toastWrap') || (function(){ const w = document.createElement('div'); w.id='toastWrap'; w.className='toast-wrap'; document.body.appendChild(w); return w; })();
+      const before = Array.from(wrap.children);
+      // call existing toast
+      try { window.showToast(message, title, ttl); } catch(e){ console.warn('showToast failed', e); resolve(); return; }
+
+      // find newly added toast (wait up to 200ms if not immediate)
+      let newToast = null;
+      const findNew = () => {
+        const after = Array.from(wrap.children);
+        for (let el of after) if (!before.includes(el)) return el;
+        return null;
+      };
+      newToast = findNew();
+      const maxWaitForInsert = 300;
+      let waited = 0;
+      const pollInterval = 50;
+      const pollTimer = setInterval(() => {
+        newToast = findNew();
+        waited += pollInterval;
+        if (newToast || waited >= maxWaitForInsert) {
+          clearInterval(pollTimer);
+          if (!newToast) {
+            // If not found, fallback to waiting the ttl then resolve
+            setTimeout(resolve, typeof ttl === 'number' ? ttl : 4200);
+            return;
+          }
+          // Observe removal OR wait ttl
+          const ttlMs = typeof ttl === 'number' ? ttl : 4200;
+          let resolved = false;
+          // If the toast element is removed, resolve early
+          const mo = new MutationObserver(() => {
+            if (!document.body.contains(newToast)) {
+              if (!resolved) { resolved = true; mo.disconnect(); resolve(); }
+            }
+          });
+          mo.observe(document.body, { childList: true, subtree: true });
+          // Also watch for its removal from parent via periodic check (safety)
+          const checkTimer = setInterval(() => {
+            if (!document.body.contains(newToast)) {
+              if (!resolved) { resolved = true; clearInterval(checkTimer); mo.disconnect(); resolve(); }
+            }
+          }, 150);
+          // Fallback: resolve after ttl
+          setTimeout(() => {
+            if (!resolved) { resolved = true; clearInterval(checkTimer); mo.disconnect(); resolve(); }
+          }, ttlMs + 100); // small buffer
+        }
+      }, pollInterval);
+    });
+  }
+
+  // replace 実行
+  function doReplaceForVc(val) {
+    try {
+      const target = vcToPath(val);
+      const query = window.location.search || '';
+      if (window.location.pathname === target) return;
+      location.replace(target + query);
+    } catch(e){ console.warn('replace error', e); }
+  }
+
+  // attach unified save handler (avoid duplicates)
+  if (!saveBtn.__vc_postsave_attached__) {
+    saveBtn.addEventListener('click', function(){
+      // delay slightly so existing save logic runs first
+      setTimeout(async function(){
+        try {
+          const val = vcSelect.value || '0';
+          setVcCookie(val);
+
+          // show toast and wait until it disappears or TTL
+          // TTL: match your site's toast default if known; use 2000-4200ms typical.
+          const ttl = 2000;
+          await showToastAsync('設定を保存しました!!', '保存完了', ttl);
+
+          // after toast lifecycle completes, perform replace
+          doReplaceForVc(val);
+        } catch(e){
+          console.warn('post-save flow failed', e);
+        }
+      }, 40);
+    }, false);
+    saveBtn.__vc_postsave_attached__ = true;
+  }
+
+  // helper cookie writer used above
+  function setVcCookie(val) {
+    const d = new Date();
+    d.setTime(d.getTime() + 30*24*60*60*1000);
+    document.cookie = 'vc=' + encodeURIComponent(String(val)) + ';expires=' + d.toUTCString() + ';path=/';
+  }
+
+});
+</script>
+
+
+  </body>
 </html>
