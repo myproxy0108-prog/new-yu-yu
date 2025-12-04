@@ -187,6 +187,8 @@ def getVideoData(videoid):
         for stream in adaptive
         if stream.get('container') == 'webm' and stream.get('resolution')
     ]
+
+
     return [
       {
         # 既存処理（ここでは formatStreams のURLを逆順にして上位2件を使用）
@@ -352,6 +354,7 @@ def fetch_embed_url_from_video_config(videoid, config_url="https://raw.githubuse
         return embed_url
     except Exception:
         return None
+
 
 
 
@@ -603,6 +606,59 @@ def ume_video(v: str, response: Response, request: Request, yuki: Union[str, Non
         "proxy": proxy,
         "embed_url": embed_url
     })
+
+@app.get('/www', response_class=HTMLResponse)
+def video(v:str, response: Response, request: Request, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
+    # v: video_id
+    if not(checkCookie(yuki)):
+        return redirect("/")
+    response.set_cookie(key="yuki", value="True", max_age=7*24*60*60)
+    video_data = getVideoData(v)
+    '''
+    return [
+        {
+            'video_urls': list(reversed([i["url"] for i in t["formatStreams"]]))[:2],
+            'description_html': t["descriptionHtml"].replace("\n", "<br>"),
+            'title': t["title"],
+            'length_text': str(datetime.timedelta(seconds=t["lengthSeconds"]))
+            'author_id': t["authorId"],
+            'author': t["author"],
+            'author_thumbnails_url': t["authorThumbnails"][-1]["url"],
+            'view_count': t["viewCount"],
+            'like_count': t["likeCount"],
+            'subscribers_count': t["subCountText"]
+        },
+        [
+            {
+                "title": i["title"],
+                "author_id": i["authorId"],
+                "author": i["author"],
+                "length_text": str(datetime.timedelta(seconds=i["lengthSeconds"])),
+                "view_count_text": i["viewCountText"]
+            } for i in recommended_videos
+        ]
+    ]
+    '''
+    response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
+    return template('watch.html', {
+        "request": request,
+        "videoid": v,
+        "videourls": video_data[0]['video_urls'],
+        "description": video_data[0]['description_html'],
+        "video_title": video_data[0]['title'],
+        "author_id": video_data[0]['author_id'],
+        "author_icon": video_data[0]['author_thumbnails_url'],
+        "author": video_data[0]['author'],
+        "length_text": video_data[0]['length_text'],
+        "view_count": video_data[0]['view_count'],
+        "like_count": video_data[0]['like_count'],
+        "subscribers_count": video_data[0]['subscribers_count'],
+        "recommended_videos": video_data[1],
+        "proxy":proxy,
+      "streamUrls": video_data[0].get('streamUrls', [])
+
+    })
+
 @app.get("/search", response_class=HTMLResponse)
 def search(q: str, response: Response, request: Request, page: Union[int, None] = 1,
            yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
@@ -634,6 +690,8 @@ def channel(channelid:str, response: Response, request: Request, yuki: Union[str
     response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
     t = getChannelData(channelid)
     return template("channel.html", {"request": request, "results": t[0], "channel_name": t[1]["channel_name"], "channel_icon": t[1]["channel_icon"], "channel_profile": t[1]["channel_profile"], "cover_img_url": t[1]["author_banner"], "subscribers_count": t[1]["subscribers_count"], "proxy": proxy})
+
+
 
 @app.get("/playlist", response_class=HTMLResponse)
 def playlist(list:str, response: Response, request: Request, page:Union[int, None]=1, yuki: Union[str] = Cookie(None), proxy: Union[str] = Cookie(None)):
